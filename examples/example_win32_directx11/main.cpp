@@ -7,6 +7,12 @@
 #include "imgui_impl_dx11.h"
 #include <d3d11.h>
 #include <tchar.h>
+#include <lotto/BallsLogic.cpp>
+#include <iterator>
+#include <memory>
+#include <iostream>
+#include <vector>
+#include <examples/example_win32_directx11/BallLogic.cpp>
 
 // Data
 static ID3D11Device*            g_pd3dDevice = NULL;
@@ -20,6 +26,11 @@ void CleanupDeviceD3D();
 void CreateRenderTarget();
 void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+float BallLogic::x = 170;
+float BallLogic::y = 170;
+float BallLogic::interface_x = 0;
+float BallLogic::interface_y = 0;
 
 // Main code
 int main(int, char**)
@@ -75,6 +86,10 @@ int main(int, char**)
     // Our state
     bool show_demo_window = true;
     bool show_another_window = false;
+    bool lotto = true;
+    bool test = true;
+    bool fov = false;
+    float temp = 10;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     // Main loop
@@ -135,7 +150,34 @@ int main(int, char**)
                 show_another_window = false;
             ImGui::End();
         }
+        if (GetAsyncKeyState(VK_DELETE) & 1) {
+            lotto = !lotto;
+        }
 
+        if (lotto) {
+            BallLogic::x = 270;
+            BallLogic::y = 270;
+            BallLogic bl;
+            ImGui::Begin("lotto");
+            ImGui::Checkbox("circle fov", &fov);
+            ImGui::SliderFloat("circle size", &temp, 0, 1920.0f, "%f.03 size");
+            if (ImGui::Button("Test Me")) {
+                test = !test;
+                
+            }
+            
+            if (fov) {
+                auto draw = ImGui::GetBackgroundDrawList();
+                bl.fun(draw, &temp);
+                if (!test) {
+
+                    bl.move();
+                    test = !test;
+                }
+                
+            }
+            ImGui::End();
+        }
         // Rendering
         ImGui::Render();
         const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
@@ -245,3 +287,4 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
     return ::DefWindowProc(hWnd, msg, wParam, lParam);
 }
+
