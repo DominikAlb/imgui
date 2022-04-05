@@ -1,18 +1,17 @@
+//Plik glowny z uruchomieniem kodu
+//Program uruchamia na wstepie biblioteke dear imgui
+//oraz inicalizuje parametry statyczne
+//w funkcji main uruchamiany jest glowny interfejs uzytkownika done = menu_interface.init(menu);
+
+
 // Dear ImGui: standalone example application for DirectX 11
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
-
-#include "imgui.h"
+#pragma once
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
-#include <d3d11.h>
 #include <tchar.h>
-#include <lotto/BallsLogic.cpp>
-#include <iterator>
-#include <memory>
-#include <iostream>
-#include <vector>
-#include <examples/example_win32_directx11/BallLogic.cpp>
+#include <examples/example_win32_directx11/Interface.h>
 
 // Data
 static ID3D11Device*            g_pd3dDevice = NULL;
@@ -26,21 +25,33 @@ void CleanupDeviceD3D();
 void CreateRenderTarget();
 void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+ImU32 col = IM_COL32(255, 0, 0, 255);
+ImVec2 iv(100, 100);
 
-float BallLogic::x = 170;
-float BallLogic::y = 170;
-float BallLogic::interface_x = 0;
-float BallLogic::interface_y = 0;
+float Logic<float>::x = 170;
+float Logic<float>::y = 170;
+Wall<float> Logic<float>::wall(100.0f, 100.0f, 400.0f, iv, col);
+std::vector<std::shared_ptr<Ball<float>>> Logic<float>::arr;
+
+std::vector<int> inputNumbers;
+Menu menu(true, false, false, false, false, inputNumbers, 20, 1, 10);
+
+std::shared_ptr<float> Logic<float>::gravity = menu.getGravityPtr();
+ImVec2 engineVec(300, 500);
+Engine<float> Logic<float>::engine(300, 500, engineVec, col, menu.getForcePtr(), 20);
+ImU32 collectorCol = IM_COL32(122, 122, 0, 122);
+ImVec2 iv2(250, 115.0f);
+Collector<float> Logic<float>::collector(250.0f, 115.0f, 100, iv2, collectorCol);
+std::vector<int> Logic<float>::wonNumbers;
 
 // Main code
-int main(int, char**)
-{
+int main(int, char**) {
     // Create application window
     //ImGui_ImplWin32_EnableDpiAwareness();
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("ImGui Example"), NULL };
     ::RegisterClassEx(&wc);
     HWND hwnd = ::CreateWindow(wc.lpszClassName, _T("Dear ImGui DirectX11 Example"), WS_OVERLAPPEDWINDOW, 100, 100, 1280, 800, NULL, NULL, wc.hInstance, NULL);
-
+    
     // Initialize Direct3D
     if (!CreateDeviceD3D(hwnd))
     {
@@ -84,15 +95,12 @@ int main(int, char**)
     //IM_ASSERT(font != NULL);
 
     // Our state
-    bool show_demo_window = true;
-    bool show_another_window = false;
-    bool lotto = true;
-    bool test = true;
-    bool fov = false;
-    float temp = 10;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
+    Interface menu_interface;
     // Main loop
+    for (int i = 1; i < 7; i++) {
+        menu.pushBackInputNumber(i);
+    }
     bool done = false;
     while (!done)
     {
@@ -115,69 +123,10 @@ int main(int, char**)
         ImGui::NewFrame();
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
-        if (show_demo_window)
-            ImGui::ShowDemoWindow(&show_demo_window);
+        
+        done = menu_interface.init(menu);
+        
 
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
-        {
-            static float f = 0.0f;
-            static int counter = 0;
-
-            ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-            ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-            ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-            ImGui::Checkbox("Another Window", &show_another_window);
-
-            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-            ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-            if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-                counter++;
-            ImGui::SameLine();
-            ImGui::Text("counter = %d", counter);
-
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-            ImGui::End();
-        }
-
-        // 3. Show another simple window.
-        if (show_another_window)
-        {
-            ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-            ImGui::Text("Hello from another window!");
-            if (ImGui::Button("Close Me"))
-                show_another_window = false;
-            ImGui::End();
-        }
-        if (GetAsyncKeyState(VK_DELETE) & 1) {
-            lotto = !lotto;
-        }
-
-        if (lotto) {
-            BallLogic::x = 270;
-            BallLogic::y = 270;
-            BallLogic bl;
-            ImGui::Begin("lotto");
-            ImGui::Checkbox("circle fov", &fov);
-            ImGui::SliderFloat("circle size", &temp, 0, 1920.0f, "%f.03 size");
-            if (ImGui::Button("Test Me")) {
-                test = !test;
-                
-            }
-            
-            if (fov) {
-                auto draw = ImGui::GetBackgroundDrawList();
-                bl.fun(draw, &temp);
-                if (!test) {
-
-                    bl.move();
-                    test = !test;
-                }
-                
-            }
-            ImGui::End();
-        }
         // Rendering
         ImGui::Render();
         const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };

@@ -24,6 +24,30 @@
     <ClInclude Include="..\..\backends\imgui_impl_dx11.h">
       <Filter>sources</Filter>
     </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Collector.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Logic.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>sources</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp">
@@ -50,14 +74,12 @@
     <ClCompile Include="..\..\imgui_tables.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
-    <ClCompile Include="BallLogic.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.txt" />
     <None Include="..\..\misc\debuggers\imgui.natvis">
       <Filter>sources</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
