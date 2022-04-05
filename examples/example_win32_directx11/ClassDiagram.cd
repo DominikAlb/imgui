@@ -11,7 +11,7 @@
     <Position X="18.25" Y="1.5" Width="4" />
     <InheritanceLine Type="Wall&lt;T&gt;" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="20.25" Y="6.5" />
+        <Point X="20.25" Y="6" />
         <Point X="20.25" Y="3.694" />
       </Path>
     </InheritanceLine>
@@ -36,7 +36,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Wall&lt;T&gt;">
-    <Position X="18" Y="6.5" Width="4.5" />
+    <Position X="18" Y="6" Width="4.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAQAgAAAAAAA=</HashCode>
       <FileName>Wall.h</FileName>
