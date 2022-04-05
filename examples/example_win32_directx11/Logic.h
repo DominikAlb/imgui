@@ -43,11 +43,6 @@ public:
         return *this = Logic(other);
     }
 
-    Logic& operator=(Logic&& other) noexcept {
-        std::swap(engine, other.engine);
-        return *this;
-    }
-
     static void restart() {
         x = 170;
         y = 170;

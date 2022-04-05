@@ -46,8 +46,8 @@
     <Position X="18.75" Y="9.25" Width="2.75" />
     <AssociationLine Name="collector" Type="Collector&lt;T&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="21.5" Y="11.438" />
-        <Point X="22.75" Y="11.438" />
+        <Point X="21.5" Y="11.365" />
+        <Point X="22.75" Y="11.365" />
         <Point X="22.75" Y="3.062" />
         <Point X="22.25" Y="3.062" />
       </Path>
@@ -75,8 +75,8 @@
       <FileName>Object.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="col" />
       <Field Name="center" />
+      <Field Name="col" />
     </ShowAsAssociation>
   </Class>
   <Struct Name="ImVec2">
