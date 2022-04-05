@@ -1,83 +1,93 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Ball&lt;T&gt;">
-    <Position X="1.75" Y="1" Width="7" />
+    <Position X="4.75" Y="1.75" Width="7" />
     <TypeIdentifier>
-      <HashCode>AQgAAAEACACAQEgABAAWAQAAAAACADAgCIBgAGIAAZA=</HashCode>
+      <HashCode>AQAAAEEADACIwEgABAAQAAAAAAAAAAIgCIAIAAJAAZA=</HashCode>
       <FileName>Ball.h</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="center" />
-      <Field Name="col" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Collector&lt;T&gt;">
-    <Position X="18.25" Y="2.5" Width="4" />
+    <Position X="18.25" Y="1.5" Width="4" />
+    <InheritanceLine Type="Wall&lt;T&gt;" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="20.25" Y="6.5" />
+        <Point X="20.25" Y="3.694" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAgAAAAAAAAAAAAgAEAAAQAAAAAgAAAAAABgAAQAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAgAAQAAAA=</HashCode>
       <FileName>Collector.h</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="center" />
-      <Field Name="col" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Engine&lt;T&gt;">
-    <Position X="9" Y="9.75" Width="6" />
+    <Position X="11.5" Y="9.75" Width="6" />
+    <InheritanceLine Type="Object&lt;T&gt;" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="14.5" Y="8.555" />
+        <Point X="14.5" Y="8.826" />
+        <Point X="14.5" Y="8.826" />
+        <Point X="14.5" Y="9.75" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAgAAAAACAAAAAAgAEAAAQAAAAAgAAAABABgAAAAAAA=</HashCode>
+      <HashCode>IAgAAAAAAAAAAAAAAAAAAAAAAAAAAAIABAAgAAAAAAI=</HashCode>
       <FileName>Engine.h</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="center" />
-      <Field Name="col" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Wall&lt;T&gt;">
     <Position X="18" Y="6.5" Width="4.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAgAAAQAEAAAAAAAAAQAAAAAAACYAAABgAGAgAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAQAgAAAAAAA=</HashCode>
       <FileName>Wall.h</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="logic" />
-      <Field Name="center2" />
-      <Field Name="col" />
-    </ShowAsAssociation>
   </Class>
   <Class Name="Logic&lt;T&gt;">
-    <Position X="18.5" Y="10.5" Width="2.75" />
+    <Position X="18.75" Y="9.25" Width="2.75" />
+    <AssociationLine Name="collector" Type="Collector&lt;T&gt;" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="21.5" Y="11.438" />
+        <Point X="22.75" Y="11.438" />
+        <Point X="22.75" Y="3.062" />
+        <Point X="22.25" Y="3.062" />
+      </Path>
+    </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgACAAAAAAAAAgAAAAQIAACBgAAQAAAA=</HashCode>
+      <HashCode>BIACBBgAAAAQAACIAAoAAAAAgAAAAAKAACBkAASAAAA=</HashCode>
       <FileName>Logic.h</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Field Name="engine" />
+      <Field Name="collector" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Interface">
-    <Position X="22.75" Y="1.5" Width="5" />
+    <Position X="5.75" Y="9.5" Width="5" />
     <TypeIdentifier>
-      <HashCode>AAgAAAACCAEAAAAgAEBgAAQEAAEAAAKIAABgAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Interface.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Collision&lt;T&gt;">
-    <Position X="1.5" Y="9" Width="6.25" />
+  <Class Name="Object&lt;T&gt;">
+    <Position X="12.5" Y="4.5" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAIAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
-      <FileName>Collision.h</FileName>
+      <HashCode>AAgAAAFAAAAEAAAgAEAGAQAAAAACADIAAABgAGAAAAA=</HashCode>
+      <FileName>Object.h</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="col" />
+      <Field Name="center" />
+    </ShowAsAssociation>
   </Class>
   <Struct Name="ImVec2">
-    <Position X="10.75" Y="2.5" Width="1.5" />
+    <Position X="14.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAEAAAAAAABgAAAAAAA=</HashCode>
       <FileName>C:\Users\01156962\source\repos\imgui\imgui.h</FileName>
     </TypeIdentifier>
   </Struct>
   <Typedef Name="ImU32" Collapsed="true">
-    <Position X="13.75" Y="5" Width="1.75" />
+    <Position X="12.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>C:\Users\01156962\source\repos\imgui\imgui.h</FileName>
