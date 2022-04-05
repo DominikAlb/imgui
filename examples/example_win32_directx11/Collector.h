@@ -13,8 +13,6 @@ public:
 
     Collector(const Collector& other) : Wall<T>(other) {}
 
-    Collector(Collector&& other) {}
-
     Collector& operator=(const Collector& other) {
         return *this = Engine(other);
     }
