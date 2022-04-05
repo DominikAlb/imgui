@@ -17,16 +17,6 @@ public:
         return *this = Engine(other);
     }
 
-    Engine& operator=(Engine&& other) noexcept {
-        std::swap(x, other.x);
-        std::swap(y, other.y);
-        std::swap(center, other.center);
-        std::swap(col, other.col);
-        std::swap(force, other.force);
-        std::swap(radius, other.radius);
-        return *this;
-    }
-
     void init(ImDrawList* draw) override {
         ImVec2 c(x, y);
         ImVec2 c2(x+length, y);

@@ -21,19 +21,8 @@ public:
 
     Wall(const Wall& other) : x(other.x), y(other.y), center(other.center), col(other.col), length(other.length) {}
 
-    Wall(Wall&& other) {}
-
     Wall& operator=(const Wall& other) {
         return *this = Engine(other);
-    }
-
-    Wall& operator=(Wall&& other) noexcept {
-        std::swap(x, other.x);
-        std::swap(y, other.y);
-        std::swap(center, other.center);
-        std::swap(col, other.col);
-        std::swap(length, other.length);
-        return *this;
     }
 
     void init(ImDrawList* draw) override {

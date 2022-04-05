@@ -37,7 +37,6 @@ private:
 public:
     Logic() {}
     Logic(const Logic& other) {}
-    Logic(Logic&& other) {}
 
     Logic& operator=(const Logic& other) {
         return *this = Logic(other);

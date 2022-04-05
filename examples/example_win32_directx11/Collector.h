@@ -17,10 +17,4 @@ public:
         return *this = Engine(other);
     }
 
-    Collector& operator=(Collector&& other) noexcept {
-        std::swap(center, other.center);
-        std::swap(col, other.col);
-        return *this;
-    }
-
 };
